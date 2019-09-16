@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// オプション画面を開くためのチェックボックス
 public class OptionToggle : MonoBehaviour {
     private Toggle tgl;
-    private OptionToggle opt_tgl;
+//    private OptionToggle opt_tgl;
 
 	// Use this for initialization
 	void Start () {
         tgl = GetComponent<Toggle>();
-        opt_tgl = GetComponent<OptionToggle>();
+//        opt_tgl = GetComponent<OptionToggle>();
 	}
 	
 	// Update is called once per frame

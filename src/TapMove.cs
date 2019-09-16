@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+// スマホ用タップ動作 未実装
 public class TapMove : MonoBehaviour {
     private NavMeshAgent agent;
 

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// GameビューにてSceneビューのようなカメラの動きをマウス操作によって実現する
-/// </summary>
+// 拾い物
+// GameビューにてSceneビューのようなカメラの動きをマウス操作によって実現する
 [RequireComponent(typeof(Camera))]
 public class SceneViewCamera : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class SceneViewCamera : MonoBehaviour
     private Vector3 targetPos;      //後でconfigにセーブする
     private float zoom = -10.0f;    //後でconfigにセーブする
     private float height = 5.0f;    //後でconfigにセーブする
-//    public GameObject volOpt;
+
     [SerializeField]
     private GameObject bgmSld;
     [SerializeField]
@@ -44,7 +43,6 @@ public class SceneViewCamera : MonoBehaviour
 
     private void Start()
     {
-        //        volOpt = GameObject.Find("VolumeOption");
         Slider bgmVal = bgmSld.GetComponent<Slider>();
         Slider fsVal = fsSld.GetComponent<Slider>();
         Slider wsVal = wsSld.GetComponent<Slider>();
@@ -58,20 +56,8 @@ public class SceneViewCamera : MonoBehaviour
         Slider CamHgtVal = CamHeightSld.GetComponent<Slider>();
         CamZmVal.value = -10.0f;
         CamHgtVal.value = 5.0f;
-
-        //        AudioSetting audioVol = volOpt.GetComponent<AudioSetting>();
-        //        audioVol.SetBGM(-20.0f);
-        //        audioVol.SetFootstep(-20.0f);
-        //        audioVol.SetWaveSound(-20.0f);
-        //        audioVol.SetBird(-20.0f);
-
-        //        audioSource.volume = 0.2f;
-        //        Debug.Log(audioSource.volume);
         cameraPos = transform.position;
         targetPos = target.transform.position;
-//        Debug.Log("Camera Start");
-//        Debug.Log("cameraPos:"+cameraPos);
-//        Debug.Log("targetPos:"+targetPos);
         this.zoom_slider = GetComponent<Slider>();
         MouseWheel(zoom);
     }
@@ -91,23 +77,11 @@ public class SceneViewCamera : MonoBehaviour
 
     public void SetZoom(float value)
     {
-        //        Slider sld = gameObject.GetComponent<Slider>();
-//        float  = this.zoom_slider.GetComponent<Slider>().value;
-//        MouseWheel(value);
         zoom = value;
     }
 
     public void SetCamHeight(float value)
     {
-//        targetPos = target.transform.position;
-//        cameraPos = transform.localPosition;
-//        Vector3 preCameraPos = cameraPos;
-//        cameraPos = preCameraPos + transform.up * value;
-//        cameraPos.y += 20.0f;
-//        transform.localPosition = cameraPos;
-//        transform.Translate(0, value, 0);
-//        Debug.Log("SetCamHeight:"+value);
-//        Debug.Log("cameraPos:" + cameraPos);
         height = value;
     }
 
@@ -127,16 +101,9 @@ public class SceneViewCamera : MonoBehaviour
 
     private void MouseWheel(float delta)
     {
-        // この辺をいじればいいと思う。スライダーの値をここに適用する。
-        //        transform.position += transform.forward * delta * wheelSpeed * 2.0f;
-//        cameraPos = transform.position;
         targetPos = target.transform.position;
         cameraPos = targetPos + transform.forward * delta;
-//        cameraPos.y = targetPos.y + 8.0f;
         transform.position = cameraPos;
-
-//        Debug.Log(transform.position);
-//        Debug.Log(delta);
         return;
     }
 
@@ -171,25 +138,13 @@ public class SceneViewCamera : MonoBehaviour
         float rotateY = 0.0f;
 
         // 十字キーで首を左右に回す
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rotateX = 0.5f;
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            rotateX = -0.5f;
-        }
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            rotateY = 0.2f;
-        }
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            rotateY = -0.2f;
-        }        // targetの位置のY軸を中心に、回転（公転）する
+        if (Input.GetKey(KeyCode.RightArrow)){rotateX = 0.5f;}
+        if (Input.GetKey(KeyCode.LeftArrow)){rotateX = -0.5f;}
+        if (Input.GetKey(KeyCode.UpArrow)){rotateY = 0.2f;}
+        if (Input.GetKey(KeyCode.DownArrow)){rotateY = -0.2f;}
+        // targetの位置のY軸を中心に、回転（公転）する
         transform.RotateAround(targetPos, Vector3.up, rotateX * Time.deltaTime * 200f);
         // カメラの垂直移動（※角度制限なし、必要が無ければコメントアウト）
         transform.RotateAround(targetPos, transform.right, rotateY * Time.deltaTime * 200f);
-//        transform.Rotate(transform.right * rotateY);
     }
 }
